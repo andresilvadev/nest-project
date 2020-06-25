@@ -1,4 +1,4 @@
-import { Controller, Post, Res, HttpStatus, Get, Body } from '@nestjs/common';
+import { Controller, Post, Res, HttpStatus, Get, Body, Query, ParseIntPipe, Param } from '@nestjs/common';
 import { Response } from 'express';
 import { UsersService } from './users.service';
 import { UserDto } from './dto/user.dto';
@@ -17,6 +17,11 @@ export class UsersController {
     @Get()
     async findAll(): Promise<User[]> {
       return this.usersService.findAll();
+    }
+    
+    @Get(':id')
+    async findOne(@Param('id', ParseIntPipe) id: number) {
+      return await this.usersService.findOne(id);
     }
 
     /**

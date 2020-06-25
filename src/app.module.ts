@@ -8,7 +8,7 @@ import { UsersService } from './users/users.service';
 import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from './config/config.module';
-import { LoggerMiddleware } from './logger.middleware';
+import { LoggerMiddleware } from './middleware/logger.middleware';
 
 @Module({
   imports: [
@@ -29,6 +29,6 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(LoggerMiddleware)
-      .forRoutes('users');
+      .forRoutes('products');
   }
 }
