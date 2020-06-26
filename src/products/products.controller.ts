@@ -1,11 +1,22 @@
-import { Controller, Get, Req, Post, Redirect, Query, Param, Body, HttpException, HttpStatus, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Req, Post, Redirect, Query, Param, Body, HttpException, HttpStatus, ParseIntPipe, UsePipes } from '@nestjs/common';
 import { Request } from 'express';
-import { ProductDto } from './product.dto';
+import { ProductDto } from './dto/product.dto';
+import { ProductsService } from './products.service';
+import { Product } from './interface/product.interface';
+import { JoiValidationPipe } from 'src/pipes/joi-validation.pipe';
+import * as Joi from '@hapi/joi';
+
+const createProductSchema = Joi.object().keys({
+    name: Joi.string().required(),
+    weight: Joi.number().required(),
+    color: Joi.string().optional(),
+    category: Joi.string().optional()
+});
 
 @Controller('products')
 export class ProductsController {
 
-    constructor(){}
+    constructor(private readonly productsService: ProductsService){}
     
     // Modo normal
     // @Get()
@@ -34,8 +45,14 @@ export class ProductsController {
     }
 
     @Post()
+    @UsePipes(new JoiValidationPipe(createProductSchema))
     async create(@Body() productDto: ProductDto) {
-        return 'This action adds a new product';
+        this.productsService.create(productDto);        
+    }
+
+    @Get('show-all')
+    async showAllProducts(): Promise<Product[]>  {
+        return this.productsService.showAll();
     }
 
     @Post('new')

@@ -2,7 +2,7 @@ import { Controller, Post, Res, HttpStatus, Get, Body, Query, ParseIntPipe, Para
 import { Response } from 'express';
 import { UsersService } from './users.service';
 import { UserDto } from './dto/user.dto';
-import { User } from './interfaces/user.interface';
+import { User } from './interface/user.interface';
 
 @Controller('users')
 export class UsersController {

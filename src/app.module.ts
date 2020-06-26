@@ -9,6 +9,7 @@ import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from './config/config.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
+import { ProductsService } from './products/products.service';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
     CategoryController
   ],
   providers: [
-    AppService
+    AppService,
+    ProductsService
   ],
 })
 export class AppModule implements NestModule {
