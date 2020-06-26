@@ -1,10 +1,11 @@
-import { Controller, Get, Req, Post, Redirect, Query, Param, Body, HttpException, HttpStatus, ParseIntPipe, UsePipes } from '@nestjs/common';
+import { Controller, Get, Req, Post, Redirect, Query, Param, Body, HttpException, HttpStatus, ParseIntPipe, UsePipes, UseGuards, SetMetadata } from '@nestjs/common';
 import { Request } from 'express';
 import { ProductDto } from './dto/product.dto';
 import { ProductsService } from './products.service';
 import { Product } from './interface/product.interface';
 import { JoiValidationPipe } from 'src/pipes/joi-validation.pipe';
 import * as Joi from '@hapi/joi';
+import { RolesGuard } from 'src/guard/role/roles.guard';
 
 const createProductSchema = Joi.object().keys({
     name: Joi.string().required(),
@@ -14,6 +15,7 @@ const createProductSchema = Joi.object().keys({
 });
 
 @Controller('products')
+@UseGuards(RolesGuard)
 export class ProductsController {
 
     constructor(private readonly productsService: ProductsService){}
@@ -51,6 +53,7 @@ export class ProductsController {
     }
 
     @Get('show-all')
+    @SetMetadata('roles', ['admin'])
     async showAllProducts(): Promise<Product[]>  {
         return this.productsService.showAll();
     }
