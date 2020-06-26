@@ -33,3 +33,41 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Build docker image
+
+```bash
+# development
+$ docker-compose build
+```
+
+## Start and login to the container:
+
+```bash
+# development
+$ docker-compose up -d
+$ docker-compose exec nest bash
+```
+
+## Se estiver rodando no WSL2 do Windows será necessário liberar a pemissão de acesso ao arquivo entrypoint.sh
+
+```bash
+# development
+$ chmod +x .docker/entrypoint.sh
+```
+
+## Se estiver rodando no WSL2 - Caso necessário converta o arquivo para um arquivo unix
+
+```bash
+# development
+$ dos2unix .docker/entrypoint.sh
+```
+
+## Se estiver rodando no WSL2 - Possiveis erros, se este erro existir, certifique-se de salvar seu arquivo no formato LF e usar no inicio do arquivo.sh o (#!/bin/sh) ao invés de #!/bin/bash
+
+```bash
+# development
+Starting nest-project-app ... done
+Attaching to nest-project-app
+nest-project-app | standard_init_linux.go:211: exec user process caused "no such file or directory"
+nest-project-app exited with code 1
+```
