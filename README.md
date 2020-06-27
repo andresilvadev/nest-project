@@ -11,72 +11,77 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
+Como iniciar o projeto NestJS com Docker
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
+## Instalação
+- Necessário criar um volume do PosgreSQL
 ```bash
-$ npm install
+$ docker volume create --name=nestjs-pgdata
 ```
 
-## Running the app
-
+## Execute o projeto com o Docker
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+# roda a aplicação em ambiente dev
+$ docker-compose up
 ```
 
-## Build docker image
+## Acessando o banco pelo browser
+* No windos basta apenas acessar o banco pelo pgadmin criar um novo serve e passar os parametros de conexão
+* Acesse http://localhost:8080/browser/ para acessar o painel do PgAdmin
 
+## Acessando a aplicação pelo browser
+* No windos basta apenas acessar o banco pelo pgadmin criar um novo serve e passar os parametros de conexão
+
+* Acesse http://localhost:3000 para acessar o Nest.js
+
+
+## Outras considerações
 ```bash
-# development
-$ docker-compose build
-```
-
-## Start and login to the container:
-
-```bash
-# development
+# roda a aplicação em background
 $ docker-compose up -d
+
+# acessando o bash da aplicação
 $ docker-compose exec nest bash
+
+# roda a aplicação gerando o build
+$ docker-compose --build
 ```
 
 ## Se estiver rodando no WSL2 do Windows será necessário liberar a pemissão de acesso ao arquivo entrypoint.sh
 
 ```bash
-# development
+# libera acesso ao arquivo em ambiente unix
 $ chmod +x .docker/entrypoint.sh
 ```
 
 ## Se estiver rodando no WSL2 - Caso necessário converta o arquivo para um arquivo unix
 
 ```bash
-# development
+# converte o arquivo para ambiente unix
 $ dos2unix .docker/entrypoint.sh
 ```
 
-## Se estiver rodando no WSL2 - Possiveis erros, se este erro existir, certifique-se de salvar seu arquivo no formato LF e usar no inicio do arquivo.sh o (#!/bin/sh) ao invés de #!/bin/bash
-
+## Se estiver rodando no WSL2 - Possíveis erros como referente abaixo podem existir
 ```bash
-# development
+# erro no terminal bash
 Starting nest-project-app ... done
 Attaching to nest-project-app
 nest-project-app | standard_init_linux.go:211: exec user process caused "no such file or directory"
 nest-project-app exited with code 1
 ```
-
+* Para resolver este problema precisamos nos certifique-se de salvar seu arquivo no formato LF
+* Usar no inicio do arquivo.sh o #!/bin/sh ao invés de #!/bin/bash
+```bash
+#!/bin/sh
+cd /home/node/app
+npm install
+npm run start:dev
+```
 
 ## Conectando no postgres pelo terminal bash
 
 ```bash
-# development
+# terminal bash
 $ cd /home/andre/projects/nest-project
 $ docker-compose run postgres bash
 $ psql --host=postgres --username=postgres --dbname=nestjs_db
@@ -89,6 +94,4 @@ $ \d # verify table does already not exist
 Did not find any relations.
 ```
 
-## Acessando o banco pelo browser
-* No windos basta apenas acessar o banco pelo pgadmin criar um novo serve e passar os parametros de conexão
-http://localhost:8080/browser/
+
