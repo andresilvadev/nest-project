@@ -1,7 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
 
 @Entity()
-export class UserEntity {
+export class User {
     
     @PrimaryGeneratedColumn()
     id: number;
@@ -18,5 +18,3 @@ export class UserEntity {
     @Column()
     isActive: boolean;
 }
-
-export default UserEntity;

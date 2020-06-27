@@ -88,3 +88,7 @@ nestjs_db=#
 $ \d # verify table does already not exist
 Did not find any relations.
 ```
+
+## Acessando o banco pelo browser
+* No windos basta apenas acessar o banco pelo pgadmin criar um novo serve e passar os parametros de conexão
+http://localhost:8080/browser/
