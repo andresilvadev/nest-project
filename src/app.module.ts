@@ -4,17 +4,13 @@ import { AppService } from './app.service';
 import { ProductsController } from './products/products.controller';
 import { AdminController } from './admin/admin.controller';
 import { CategoryController } from './category/category.controller';
-import { UsersService } from './users/users.service';
-import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
-import { ConfigModule } from './config/config.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { ProductsService } from './products/products.service';
 
 @Module({
   imports: [
     UsersModule,
-    ConfigModule.register({ folder: './config'})
   ],
   controllers: [
     AppController, 

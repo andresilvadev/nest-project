@@ -71,3 +71,20 @@ Attaching to nest-project-app
 nest-project-app | standard_init_linux.go:211: exec user process caused "no such file or directory"
 nest-project-app exited with code 1
 ```
+
+
+## Conectando no postgres pelo terminal bash
+
+```bash
+# development
+$ cd /home/andre/projects/nest-project
+$ docker-compose run postgres bash
+$ psql --host=postgres --username=postgres --dbname=nestjs_db
+Password for user postgres: postgres
+psql (12.3 (Debian 12.3-1.pgdg100+1))
+Type "help" for help.
+nestjs_db=#
+
+$ \d # verify table does already not exist
+Did not find any relations.
+```

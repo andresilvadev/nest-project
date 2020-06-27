@@ -1,13 +1,12 @@
-import { Module, Global, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { LoggerMiddleware } from 'src/middleware/logger.middleware';
 
-// @Global() // Altera o escopo do módulo para global Ex: Conexão de banco
-@Module({
+@Module({        
     controllers: [UsersController],
     providers: [UsersService],
-    // exports: [UsersService]  // Módulo compartilhado
+    exports: [UsersService] 
 })
 export class UsersModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {
