@@ -94,4 +94,8 @@ $ \d # verify table does already not exist
 Did not find any relations.
 ```
 
-
+## Criando migration
+```bash
+# criando uma nova migracao 
+$ ts-node ./node_modules/typeorm/cli.js migration:create -n CreateUserTable
+```

@@ -7,9 +7,17 @@ import { CategoryController } from './category/category.controller';
 import { UsersModule } from './users/users.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { ProductsService } from './products/products.service';
+import { ConfigModule } from '@nestjs/config';
+import databaseConfig from './config/database.configuration';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+      load: [databaseConfig],
+      isGlobal: true,
+      expandVariables: true,
+    }),
     UsersModule,
   ],
   controllers: [
